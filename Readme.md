@@ -6,10 +6,14 @@
 * If there are invalid packets, it outputs an error message for each invalid packet and exits with a non-zero status.
 
 ## Dependencies
+Please install the following dependencies before running the code.
+
 * [FFMPEG](https://www.ffmpeg.org/download.html)
 * [TSDuck](https://tsduck.io/download/tsduck/)
   
 ## Usage
+The code is a bash script, it should run in a unix terminal.
+
 ```
 cat file.ts | ./mpegts-parser
 ```
