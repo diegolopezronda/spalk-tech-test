@@ -11,7 +11,7 @@
   
 ## Usage
 ```
-cat file.ts | ./mpegts-parser.sh
+cat file.ts | ./mpegts-parser
 ```
 
 ## References
