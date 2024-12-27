@@ -8,7 +8,7 @@
 # If there are invalid packets, it outputs an error message for each invalid 
 # packet and exits with a non-zero status.
 
-# Usage: cat file.ts | ./mpegts-parser.sh
+# Usage: cat file.ts | ./mpegts-parser
 
 # Author: Diego Lopez <diego.lopez.ronda@gmail.com>
 # Date: 2024-12-28
