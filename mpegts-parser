@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# This script reads a MPEG-TS file from stdin and outputs a list of PIDs in the 
+# file.
+# It uses tsdump to find invalid packets and tsanalyze to find PIDs.
+# An invalid packet is a packet that does not start with the sync byte 0x47.
+# If there are no invalid packets, it outputs a list of PIDs.
+# If there are invalid packets, it outputs an error message for each invalid 
+# packet and exits with a non-zero status.
+
+# Usage: cat file.ts | ./mpegts-parser.sh
+
+# Author: Diego Lopez <diego.lopez.ronda@gmail.com>
+# Date: 2024-12-28
+# Version: 0.0.1
+
+TEMP_FILE=$(mktemp)
+cat >"$TEMP_FILE"
+FRAME_LENGTH=188
+INVALID_PACKETS=$(tsdump -h $TEMP_FILE | grep -B 1 INVALID | grep -v INVALID | sed 's/\* Packet //' | sed 's/,//')
+INVALID_PACKETS_COUNT=$(echo $INVALID_PACKETS | wc -L)
+if [ "$INVALID_PACKETS_COUNT" -eq "0" ]; then
+	tsanalyze --pid-list "$TEMP_FILE" | tr ' ' '\n' | while read -r pid; do
+		printf "0x%x\n" "$pid"
+	done
+	rm "$TEMP_FILE"
+	exit 0
+fi
+echo "$INVALID_PACKETS" | while read -r packet_number; do
+	OFFSET=$((packet_number * FRAME_LENGTH))
+	echo "No sync byte present in packet $packet_number, offset $OFFSET"
+done
+rm "$TEMP_FILE"
+exit 1
