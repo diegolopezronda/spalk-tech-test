@@ -73,7 +73,8 @@ Fields:
 * B: Transport error indicator (TEI)
 * C: Payload unit start indicator (PUSI)
 * D: Transport priority
-* E: Payload
+* E: PID
+* F: Payload
 
 Spalk is exploring the possibility of launching a feature that accepts uploaded 
 and streamed MPEG Transport Stream files from our users. As a part of this we 
