@@ -74,7 +74,7 @@ Fields:
 * C: Payload unit start indicator (PUSI)
 * D: Transport priority
 * E: PID
-* F: Payload
+* F: Other (Transport scrambling control, Adaptation field control, Continuity counter, Adaptation field) and Payload
 
 Spalk is exploring the possibility of launching a feature that accepts uploaded 
 and streamed MPEG Transport Stream files from our users. As a part of this we 
